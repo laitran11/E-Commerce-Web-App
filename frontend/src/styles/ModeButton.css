@@ -1,0 +1,46 @@
+.sun-theme {
+  border-radius: 50%;
+  padding: 8px;
+  width: 40px;
+}
+
+.moon-theme {
+  border-radius: 50%;
+  padding: 8px;
+  width: 40px;
+}
+
+.dropdown-menu {
+  --bs-dropdown-bg: var(--bg-dropdown) !important;
+}
+
+/* Base dropdown styles */
+.dropdown-menu {
+  --bs-dropdown-bg: var(--bg-dropdown, rgba(255, 255, 255, 0.85));
+  --bs-dropdown-color: var(--text-color, #000);
+  --bs-dropdown-link-hover-bg: rgba(0, 0, 0, 0.05);
+
+  background-color: var(--bs-dropdown-bg);
+  color: var(--bs-dropdown-color);
+  backdrop-filter: blur(10px);
+  border: none;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  min-width: 180px;
+  padding: 8px 0;
+}
+
+/* Individual dropdown items */
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  color: var(--bs-dropdown-color);
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: var(--bs-dropdown-link-hover-bg);
+}

@@ -1,0 +1,30 @@
+@import "bootstrap-icons/font/bootstrap-icons";
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root{
+  --bg-color: white;
+  --text-color: black;
+  --bg-gradient: linear-gradient(115deg, #ffffff, #d4dfed);
+  --bg-dropdown: rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="dark"]{
+  --bg-color: #1a1a1a;
+  --text-color: #fff;
+  --bg-gradient: linear-gradient(115deg, #0f0f0f,#000);
+}
+
+[data-theme="blue"]{
+  --bg-color: #e0f7ff;
+  --text-color: #003f5c;
+}
+body {
+  background: var(--bg-gradient);
+  color: var(--text-color);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  height: 100vh;
+}
