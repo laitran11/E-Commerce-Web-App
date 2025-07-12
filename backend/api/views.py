@@ -113,6 +113,19 @@ class CategoriesDetailView(APIView):
         category.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+class CategoriesByParentView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request, parent_id=None):
+        if parent_id == "null":
+            categories = Categories.objects.filter(parent__isnull=True)
+        else:
+            categories = Categories.objects.filter(parent_id=parent_id)
+
+        serializer = CategoriesSerializer(categories, many=True)
+        return Response(serializer.data)
+
+
 class UserCartView(APIView):
     permission_classes = [IsAuthenticated]
 
