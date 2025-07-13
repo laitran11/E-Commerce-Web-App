@@ -26,13 +26,15 @@
 }
 
 .carousel-img {
-    width: 100%;
+    width: 70%;
     height: auto;
+    object-fit: cover;
     object-position: center;
     border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     transition: transform 0.5s ease;
-}
+    display: block;      
+    margin: 0 auto;       
+  }
 
 .carousel-img:hover {
     transform: scale(1.05);
@@ -130,3 +132,48 @@
 .category-inner:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
+.pagination-align{
+    margin-right: 0;
+}
+.fiter-align{
+    display: flex;
+    justify-content: space-between;
+    gap: auto;
+    padding: 10px 0;
+}
+.btn-filter{
+    border: 1px solid #ccc;
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(40px);
+    color: #fff;
+    padding: 5px 8px;
+    border-radius: 10px;
+    margin-left: 2px;
+}
+.btn-filter .bi{
+    margin-right: 5px;
+}
+.btn-pagination-control{
+    margin: 0 5px;
+    padding: 4px 4px;
+    border-radius: 10px;
+    border-width: 0;
+    background-color: #0086ff;
+    color: #fff;
+}
+.btn-pagination-control:disabled{
+    background-color: #ccc;
+}
+.pagination-select{
+    padding: 4px 4px;
+}
+@media (max-width: 1024px) {
+    .fiter-align{
+        display: block;
+    }
+    .btn-filter{
+        margin-right: 20px;
+        margin-bottom: 15px;
+    }
+  }

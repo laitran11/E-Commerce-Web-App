@@ -5,6 +5,7 @@ import '../styles/Navbar.css';
 import { ThemeContext } from '../ThemeContext';
 import ModeButton from './ModeButton';
 import Form from './Form';
+import { Link } from 'react-router';
 
 export default function Navbar() {
     const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
@@ -24,7 +25,7 @@ export default function Navbar() {
         <>
             <div className='navbar-desktop'>
                 <div className='container navbar-inner'>
-                    <img src={logo_dark} alt="" className='logo' />
+                    <Link to={'/'}><img src={logo_dark} alt="" className='logo' /></Link>
                     <ul className="nav-links">
                         <li>Explore</li>
                         <li>About</li>
@@ -55,7 +56,7 @@ export default function Navbar() {
                     <div className='navbar-mobile-top'>
                         <div>
                             <button className='btn-menu' onClick={toggleHamburger}><i className="bi bi-list"></i></button>
-                            <img src={logo_dark} alt="" className='logo' />
+                            <Link to={'/'}><img src={logo_dark} alt="" className='logo' /></Link>
                         </div>
                         <div className="nav-buttons">
                             <ModeButton />

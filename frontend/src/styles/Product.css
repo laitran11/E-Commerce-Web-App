@@ -1,0 +1,15 @@
+.nav-container{
+    background: #3a6186;
+    background: -webkit-linear-gradient(135deg, #2c3e50, #093637, #3a6186, #302b63, #0f0c29);
+    background: linear-gradient(45deg, #2c3e50, #44A08D, #3a6186, #302b63, #0f0c29);
+    height: auto;
+    width: 100%;
+    display: block;
+    align-items: center;
+    padding-top: 10px;
+}
+@media (max-width: 1024px) {
+.search-box input{
+    margin-bottom: 10px;
+}
+}

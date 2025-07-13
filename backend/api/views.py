@@ -11,6 +11,10 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
 
+class CustomPagnination(PageNumberPagination):
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
 class ProductsListView(APIView):
     permission_classes = [AllowAny]
     def get(self,request):
@@ -27,14 +31,27 @@ class ProductsListView(APIView):
         if max_price:
             queryset = queryset.filter(actual_price__lte=max_price)
         
+        # filter product by category_id
+        category_id = request.query_params.get('category_id')
+        if category_id:
+            queryset = queryset.filter(category_id=category_id)
+
+        # Sorting 
+        sort = request.query_params.get('sort')
+        if sort == 'price_asc':
+            queryset = queryset.order_by('actual_price')
+        if sort == 'price_desc':
+            queryset = queryset.order_by('-actual_price')
+
         # Pagination
-        paginator = PageNumberPagination()
+        paginator = CustomPagnination()
         paginator.page_size = 30
         result_page = paginator.paginate_queryset(queryset, request)
 
+
         serializer = ProductsSerializer(result_page, many=True)
-        return Response(serializer.data)
-    
+        return paginator.get_paginated_response(serializer.data)
+
     def post(self, request):
         serializer = ProductsSerializer(data=request.data)
         if serializer.is_valid():
