@@ -9,6 +9,7 @@
 - Search Functionality
 
 ### Demo
+<img width="2560" height="1609" alt="image" src="https://github.com/user-attachments/assets/c06afb9b-00cb-4d5c-9627-8623a5208ee5" />
 
 
 ### Tech Stack
