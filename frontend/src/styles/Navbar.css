@@ -113,6 +113,10 @@
   .search-box-mobile{
     margin: 5px 0;
   }
+  .btn-cart-mobile{
+    padding: 8px 12px;
+    border-radius: 50%;
+}
   @media (max-width: 1024px) {
     .navbar-container {
         height: auto;
@@ -155,6 +159,18 @@
         display: none;
         padding: 4px 6px;
         font-size: 14px;
+    }
+    .btn-wrapper{
+      position: relative;
+    }
+    .count-items-badge{
+      position: absolute;
+      right: -20% !important;
+      top: -20% !important;
+      background-color: #f12626;
+      border-radius:50%;
+      padding: 2px 4px;
+      font-size: 8px !important;
     }
  }
 
@@ -207,4 +223,15 @@
     border: none;
     cursor: pointer;
   }
-  
+  .btn-wrapper{
+    position: relative;
+  }
+  .count-items-badge{
+    position: absolute;
+    right: -10%;
+    top: -10%;
+    background-color: #f12626;
+    border-radius:50%;
+    padding: 4px 6px;
+    font-size: 10px;
+  }

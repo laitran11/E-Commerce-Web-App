@@ -1,15 +1,21 @@
-import React, { useContext, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import logo_dark from '../assets/navbar/logo_dark.svg';
 import logo_light from '../assets/navbar/logo_light.svg';
 import '../styles/Navbar.css';
 import { ThemeContext } from '../ThemeContext';
 import ModeButton from './ModeButton';
 import Form from './Form';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import { getCartItems } from '../services/cartService';
+import { useCart } from '../context/CartContext';
 
 export default function Navbar() {
     const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
     const [username, setUsername] = useState(localStorage.getItem('USERNAME'));
+    const [searchTerm, setSearchTerm] = useState('');
+    const navigate = useNavigate();
+    const {cartItems} = useCart();
+
     const toggleHamburger = () => {
         setIsHamburgerOpen(prev => !prev);
     }
@@ -17,10 +23,22 @@ export default function Navbar() {
 
     const toggleLogin = () => setShowLogin(!showLogin);
 
-    const logout =() =>{
+    const logout = () => {
         localStorage.clear();
         setUsername(null);
     }
+    const handleSearch = () => {
+        if (searchTerm.trim()) {
+            navigate(`/search?name=${encodeURIComponent(searchTerm)}`);
+        }
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    };
+
     return (
         <>
             <div className='navbar-desktop'>
@@ -32,20 +50,26 @@ export default function Navbar() {
                         <li>Contact</li>
                     </ul>
                     <div className='search-box'>
-                        <input type="text" placeholder='Search' />
+                        <input type="text"
+                            placeholder='Search'
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            onKeyDown={handleKeyDown} />
                         <i className="bi bi-search"></i>
                     </div>
                     <div className="nav-buttons">
                         <ModeButton />
-                        { username ? (
-                            <button className='btn-login btn-layout' onClick={logout}>{username}</button>
-                        ): (
+                        {username ? (
+                            <button className='btn-login btn-layout' onClick={logout}><i className="bi bi-person-fill"></i> {username}</button>
+                        ) : (
                             <button className='btn-login btn-layout' onClick={toggleLogin}>Login</button>
                         )}
-                            {showLogin && (
-                                <Form toggleLogin={toggleLogin}  UpdateUsername={setUsername}/>
-                            )}
-                        <button className='btn-cart btn-layout'><i className="bi bi-basket-fill"></i></button>
+                        {showLogin && (
+                            <Form toggleLogin={toggleLogin} UpdateUsername={setUsername} />
+                        )}
+                        <Link to={`/cart`}><button className='btn-cart-mobile btn-layout btn-wrapper'>
+                            <span className='count-items-badge'>{cartItems.length}</span>
+                            <i className="bi bi-basket-fill"></i></button></Link>
                     </div>
                 </div>
 
@@ -60,16 +84,26 @@ export default function Navbar() {
                         </div>
                         <div className="nav-buttons">
                             <ModeButton />
-                            <button className='btn-login btn-layout' onClick={toggleLogin}>Login</button>
+                            {username ? (
+                                <button className='btn-login btn-layout' onClick={logout}><i className="bi bi-person-fill"></i> {username}</button>
+                            ) : (
+                                <button className='btn-login btn-layout' onClick={toggleLogin}>Login</button>
+                            )}
                             {showLogin && (
                                 <Form toggleLogin={toggleLogin} />
                             )}
-                            <button className='btn-cart-mobile btn-layout'><i className="bi bi-basket-fill"></i></button>
+                            <Link to={`/cart`}><button className='btn-cart-mobile btn-layout btn-wrapper'>
+                            <span className='count-items-badge'>{cartItems.length}</span>
+                            <i className="bi bi-basket-fill"></i></button></Link>
                         </div>
                     </div>
 
                     <div className='search-box search-box-mobile'>
-                        <input type="text" placeholder='Search' />
+                        <input type="text"
+                            placeholder='Search'
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            onKeyDown={handleKeyDown} />
                         <i className="bi bi-search"></i>
                     </div>
                 </div>

@@ -8,6 +8,10 @@
     align-items: center;
     padding-top: 10px;
 }
+.breadcrumb-align{
+    margin-top: 15px;
+    margin-bottom: 0px !important;
+}
 @media (max-width: 1024px) {
 .search-box input{
     margin-bottom: 10px;
