@@ -1,0 +1,44 @@
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Django specific
+*.sqlite3
+*.log
+*.pot
+*.pyc
+*.mo
+
+# Env files (secrets, passwords)
+.env
+*.env
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+*.swp
+
+# Git and version control
+.git/
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose.yml
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# IDE settings
+.vscode/
+.idea/
+
+
+node_modules/
+package-lock.json
+yarn.lock
