@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
+SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-secret')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
