@@ -25,11 +25,6 @@ jobs:
           --health-timeout=5s
           --health-retries=5
 
-    env:
-      DATABASE_URL: postgres://${{ secrets.DB_USERNAME }}:${{ secrets.DB_PASSWORD }}@localhost:5432/${{ secrets.DB_NAME }}
-      DJANGO_SETTINGS_MODULE: your_project.settings
-      SECRET_KEY: ${{ secrets.SECRET_KEY }}
-
     steps:
       - uses: actions/checkout@v4
 
@@ -43,8 +38,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Create .env file
+        run: |
+          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> backend/.env
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> backend/.env
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> backend/.env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> backend/.env
+          echo "DATABASE_URL=postgres://${{ secrets.DB_USERNAME }}:${{ secrets.DB_PASSWORD }}@localhost:5432/${{ secrets.DB_NAME }}" >> backend/.env
+
       - name: Run migrations
+        working-directory: backend
         run: python manage.py migrate
 
       - name: Run tests
+        working-directory: backend
         run: python manage.py test
