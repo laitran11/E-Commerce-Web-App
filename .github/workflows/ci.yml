@@ -46,7 +46,7 @@ jobs:
           echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
           echo "DB_USER=${{ secrets.DB_USER }}" >> .env
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
-          echo "DB_HOST=db" >> .env
+          echo "DB_HOST=localhost" >> .env
           echo "DB_PORT=5432" >> .env
 
       - name: Debug .env file
