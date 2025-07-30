@@ -1,3 +1,4 @@
+[![Django CI](https://github.com/laitran11/E-Commerce-Web-App/actions/workflows/ci.yml/badge.svg)](https://github.com/laitran11/E-Commerce-Web-App/actions/workflows/ci.yml)
 # E-Commerce-Web-App
 
 ### Features
