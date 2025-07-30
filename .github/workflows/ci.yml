@@ -12,7 +12,9 @@ jobs:
 
     services:
       postgres:
-        image: postgres
+        image: postgres:14
+        ports:
+          - 5432:5432
         env:
           POSTGRES_USER: ${{ secrets.DB_USER }}
           POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
@@ -47,7 +49,10 @@ jobs:
           echo "DB_HOST=postgres" >> .env
           echo "DB_PORT=5432" >> .env
           echo "DATABASE_URL=postgres://${{ secrets.DB_USER }}:${{ secrets.DB_PASSWORD }}@postgres:5432/${{ secrets.DB_NAME }}" >> .env
-      
+      - name: Debug .env file
+        working-directory: backend
+        run: cat .env
+
       - name: Wait for Postgres
         run: |
           for i in {1..15}; do
