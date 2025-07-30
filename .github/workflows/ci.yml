@@ -40,11 +40,13 @@ jobs:
       - name: Create .env file
         working-directory: backend
         run: |
-          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
+          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" > .env
           echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
           echo "DB_USER=${{ secrets.DB_USER }}" >> .env
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
-          echo "DATABASE_URL=postgres://${{ secrets.DB_USER }}:${{ secrets.DB_PASSWORD }}@localhost:5432/${{ secrets.DB_NAME }}" >> .env
+          echo "DB_HOST=postgres" >> .env
+          echo "DB_PORT=5432" >> .env
+          echo "DATABASE_URL=postgres://${{ secrets.DB_USER }}:${{ secrets.DB_PASSWORD }}@postgres:5432/${{ secrets.DB_NAME }}" >> .env
 
       - name: Run migrations
         working-directory: backend
