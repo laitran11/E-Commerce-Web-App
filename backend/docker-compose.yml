@@ -1,7 +1,11 @@
+version: "3.8"
+
 services:
   db:
-    image: postgres
+    image: postgres:14
     container_name: postgres-db
+    env_file:
+      - .env
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -11,7 +15,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data 
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "postgres"]
+      test: ["CMD", "pg_isready", "-U", "${DB_USER}"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -28,5 +32,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
 volumes:
   postgres_data:
