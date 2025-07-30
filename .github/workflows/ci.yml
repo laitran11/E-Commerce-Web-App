@@ -48,7 +48,7 @@ jobs:
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
           echo "DB_HOST=db" >> .env
           echo "DB_PORT=5432" >> .env
-          
+
       - name: Debug .env file
         working-directory: backend
         run: cat .env
@@ -56,7 +56,7 @@ jobs:
       - name: Wait for Postgres
         run: |
           for i in {1..15}; do
-            nc -z postgres 5432 && echo "Postgres is up" && break
+            nc -z db 5432 && echo "Postgres is up" && break
             echo "Waiting for postgres..."
             sleep 2
           done
