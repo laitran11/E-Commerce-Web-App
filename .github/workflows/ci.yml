@@ -47,7 +47,14 @@ jobs:
           echo "DB_HOST=postgres" >> .env
           echo "DB_PORT=5432" >> .env
           echo "DATABASE_URL=postgres://${{ secrets.DB_USER }}:${{ secrets.DB_PASSWORD }}@postgres:5432/${{ secrets.DB_NAME }}" >> .env
-
+      
+      - name: Wait for Postgres
+        run: |
+          for i in {1..15}; do
+            nc -z postgres 5432 && echo "Postgres is up" && break
+            echo "Waiting for postgres..."
+            sleep 2
+          done
       - name: Run migrations
         working-directory: backend
         run: python manage.py migrate
